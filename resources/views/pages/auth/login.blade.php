@@ -1,0 +1,6 @@
+@extends('layouts.crow', ['title' => 'Iniciar sesión | CROWFONDING'])
+@section('content')<section class="crow-form-wrap"><div class="crow-form"><p class="eyebrow">Bienvenido de nuevo</p><h1>Iniciar sesión</h1><p>Accede para consultar tus solicitudes o pedir un servicio.</p>
+@if(session('status'))<div class="notice success">{{ session('status') }}</div>@endif
+@if($errors->any())<div class="notice error" role="alert">@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif
+<form method="POST" action="{{ route('login.store') }}">@csrf<label for="email">Correo electrónico o nombre de usuario</label><input id="email" type="text" name="email" value="{{ old('email') }}" autocomplete="username" required autofocus><label for="password">Contraseña</label><input id="password" type="password" name="password" autocomplete="current-password" required><label class="check-row"><input type="checkbox" name="remember"> Mantener sesión iniciada</label><button class="btn-main" type="submit">Iniciar sesión</button><a class="btn-outline password-recovery-link" href="{{ route('password.request') }}">Recuperar contraseña</a></form>
+<p class="auth-switch">¿Aún no tienes cuenta? <a href="{{ route('register') }}">Regístrate</a>.</p></div></section>@endsection
